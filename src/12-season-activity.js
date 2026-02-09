@@ -31,5 +31,42 @@
  * @returns {{ season: string, activity: string } | null}
  */
 export function getSeasonActivity(month, temperature) {
-  // Your code here
+    if(month < 1 || month > 12){
+      return null
+    }
+
+    let activity = "";
+    let season = "";
+
+    if ( month == 1 || month == 2 || month == 12 ){
+      season = "Winter"
+    } else if( month == 3 || month == 4 || month == 5){
+      season = "Spring"
+    } else if( month == 6 || month == 7 || month == 8){
+      season = "Summer"
+    } else if( month == 9 || month == 10 || month == 11){
+      season = "Autumn"
+    }
+
+    if( season.toLowerCase() === "winter" && temperature < 0){
+      activity = "skiing"
+    } else if (season.toLowerCase() === "winter" && temperature >= 0){
+      activity = "ice skating"
+    } else if (season.toLowerCase() === "spring" && temperature > 20){
+      activity = "hiking"
+    } else if (season.toLowerCase() === "spring" && temperature <= 20){
+      activity = "museum visit"
+    } else if (season.toLowerCase() === "summer" && temperature > 35){
+      activity = "swimming"
+    } else if (season.toLowerCase() === "summer" && temperature <= 35){
+      activity = "cycling"
+    } else if (season.toLowerCase() === "autumn" && temperature > 15){
+      activity = "nature walk"
+    } else if (season.toLowerCase() === "autumn" && temperature <= 15){
+      activity = "reading at a cafe"
+    }
+
+    return ({season, activity})
 }
+
+console.log(getSeasonActivity(1, -5))

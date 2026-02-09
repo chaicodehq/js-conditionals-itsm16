@@ -24,7 +24,86 @@
  *
  * @param {string} password - The password to evaluate
  * @returns {string} "weak", "medium", "strong", or "very strong"
- */
+*/
 export function checkPasswordStrength(password) {
-  // Your code here
+  let strength = "";
+  let level = 0;
+  let oneLowerCase = false;
+  let oneUpperCase = false;
+  let oneNumber = false;
+  let oneSpecial = false;
+  let geEight = false;
+  
+  if(typeof password != "string" || password === ""){
+    return strength = "weak"
+  }
+
+  // check password
+  if (password.length >= 8){
+    geEight = true;
+  }
+
+  if(String(password).length <= 8){
+    strength = "weak"
+  }
+
+  for(let i =0; i< password.length; i++){
+    let char = password[i];
+
+    if(char >= "a" && char <= "z"){
+      oneLowerCase = true;
+    }
+
+    if(char >= "A" && char <= "Z"){
+      oneUpperCase = true;
+    }
+
+    if(Number(char) >= 0 ){
+      oneNumber = true
+    }
+
+    let specials = "!@#$%^&*()_+-=[]{}|;:,.<>?"
+    for(let j = 0; j < specials.length; j++){  
+      if(char == specials[j]){
+        oneSpecial = true;
+      }
+    }
+  }
+
+  if(geEight){
+    level++
+  } 
+  
+  if(oneLowerCase){
+    level++
+  } 
+  
+  if(oneUpperCase){
+    level++
+  } 
+  
+  if(oneNumber){
+    level++
+  } 
+  
+  if(oneSpecial){
+    level++
+  }
+
+
+  if(level >=2 && level <= 3){
+    strength = "medium"
+  }
+
+  if(level == 4){
+    strength = "strong"
+  }
+
+  if(level == 5){
+    strength = "very strong"
+  }
+
+  return strength;
 }
+
+checkPasswordStrength("th1s!sMg")
