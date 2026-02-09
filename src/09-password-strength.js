@@ -106,4 +106,3 @@ export function checkPasswordStrength(password) {
   return strength;
 }
 
-checkPasswordStrength("th1s!sMg")
